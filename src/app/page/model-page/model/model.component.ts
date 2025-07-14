@@ -8,5 +8,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './model.component.scss'
 })
 export class ModelComponent {
-    searchTerm = model('');
+    valueInput = model('');
 }

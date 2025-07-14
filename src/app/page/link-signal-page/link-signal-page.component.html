@@ -1,1 +1,9 @@
-<p>linkSignal Example</p>
+<h1>linkSignal Example</h1>
+
+<span>Nome</span>
+<app-model [(valueInput)]="name" />
+<span>Sobrenome</span>
+<app-model [(valueInput)]="lastname" />
+
+
+<h2>Nome completo: {{ fullName() }}</h2>

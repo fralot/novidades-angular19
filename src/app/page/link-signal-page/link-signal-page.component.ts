@@ -1,8 +1,9 @@
-import { Component, signal, computed, OnInit, linkedSignal, WritableSignal } from '@angular/core';
+import { Component, signal, OnInit, linkedSignal, WritableSignal } from '@angular/core';
+import { ModelComponent } from "../model-page/model/model.component";
 
 @Component({
   selector: 'app-link-signal-page',
-  imports: [],
+  imports: [ModelComponent],
   templateUrl: './link-signal-page.component.html',
   styleUrl: './link-signal-page.component.scss'
 })
@@ -17,22 +18,24 @@ export class LinkSignalPageComponent implements OnInit {
 
   source2: WritableSignal<number> = signal(20);
 
-  total = linkedSignal({
-    source: () => ({
-      source: this.source(),
-      source2: this.source2()
-    }),
-    computation: ({ source, source2 }) => source + source2
-  });
-
   ngOnInit(): void {
     console.log(this.doubled()); // 20
-    console.log(this.total()); // 30 (10 + 20)
 
     this.source.set(30);
     console.log(this.doubled()); // 60 (atualizado automaticamente)
-
-    console.log(this.total()); // 50 (20 + 30)
   }
+
+   name: WritableSignal<string> = signal('');
+
+
+  lastname: WritableSignal<string> = signal('');
+
+  fullName = linkedSignal({
+    source: () => ({
+      name: this.name(),
+      lastname: this.lastname()
+    }),
+    computation: (source: { name: string; lastname: string }) => `${source.name} ${source.lastname}`
+  });
 
 }

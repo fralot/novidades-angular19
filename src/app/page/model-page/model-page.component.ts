@@ -8,7 +8,7 @@ import { ModelComponent } from "./model/model.component";
   styleUrl: './model-page.component.scss'
 })
 export class ModelPageComponent {
-  parentSearchTerm: string = '';
+  parentValueInput: string = '';
 
 }
 
