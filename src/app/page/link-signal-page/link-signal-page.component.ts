@@ -25,9 +25,7 @@ export class LinkSignalPageComponent implements OnInit {
     console.log(this.doubled()); // 60 (atualizado automaticamente)
   }
 
-   name: WritableSignal<string> = signal('');
-
-
+  name: WritableSignal<string> = signal('');
   lastname: WritableSignal<string> = signal('');
 
   fullName = linkedSignal({
