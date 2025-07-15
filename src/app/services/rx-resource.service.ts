@@ -8,14 +8,14 @@ import { Pokemon } from '../model/pokemon.interfaces';
 export class RxResourceService {
   private readonly baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-  private pokeName$ = new BehaviorSubject<string>('pikachu');
-  private loading$ = new BehaviorSubject<boolean>(false);
-  private error$ = new Subject<any>();
+  private pokeName = new BehaviorSubject<string>('pikachu');
+  private loading = new BehaviorSubject<boolean>(false);
+  private error = new Subject<any>();
 
-  public pokemon$: Observable<Pokemon | null> = this.pokeName$.pipe(
+  public pokemon: Observable<Pokemon | null> = this.pokeName.pipe(
     tap(() => {
-      this.loading$.next(true);
-      this.error$.next(null);
+      this.loading.next(true);
+      this.error.next(null);
     }),
     switchMap(name =>
       fetch(`${this.baseUrl}/${name}`)
@@ -25,28 +25,28 @@ export class RxResourceService {
         })
         .then(data => data as Pokemon)
         .catch(err => {
-          this.error$.next(err);
+          this.error.next(err);
           return null;
         })
     ),
-    tap(() => this.loading$.next(false)),
+    tap(() => this.loading.next(false)),
     shareReplay(1)
   );
 
   getLoading(): Observable<boolean> {
-    return this.loading$.asObservable();
+    return this.loading.asObservable();
   }
 
   getError(): Observable<any> {
-    return this.error$.asObservable();
+    return this.error.asObservable();
   }
 
   loadPokemon(name: string) {
-    this.pokeName$.next(name);
+    this.pokeName.next(name);
   }
 
   reload() {
-    const current = this.pokeName$.getValue();
-    this.pokeName$.next(current);
+    const current = this.pokeName.getValue();
+    this.pokeName.next(current);
   }
 }
