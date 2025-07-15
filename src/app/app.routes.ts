@@ -8,15 +8,17 @@ import { LinkSignalPageComponent } from './page/link-signal-page/link-signal-pag
 import { ResourcePageComponent } from './page/resource-page/resource-page.component';
 import { RxResourcePageComponent } from './page/rx-resource-page/rx-resource-page.component';
 import { HttpResourcePageComponent } from './page/http-resource-page/http-resource-page.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
+  { path: '', component: AppComponent },
   { path: 'signal/input', component: InputPageComponent },
   { path: 'signal/output', component: OutputPageComponent },
   { path: 'signal/model', component: ModelPageComponent },
-  { path: 'viewchild', component: ViewChildPageComponent },
-  { path: 'viewchildren', component: ViewChildrenPageComponent },
-  { path: 'link-signal', component: LinkSignalPageComponent },
-  { path: 'resource', component: ResourcePageComponent },
-  { path: 'rx-resource', component: RxResourcePageComponent },
-  { path: 'http-resource', component: HttpResourcePageComponent }
+  { path: 'signal/viewchild', component: ViewChildPageComponent },
+  { path: 'signal/viewchildren', component: ViewChildrenPageComponent },
+  { path: 'signal/link-signal', component: LinkSignalPageComponent },
+  { path: 'signal/resource', component: ResourcePageComponent },
+  { path: 'signal/rx-resource', component: RxResourcePageComponent },
+  { path: 'signal/http-resource', component: HttpResourcePageComponent }
 ];

@@ -1,1 +1,16 @@
-<p>resource-page works!</p>
+<h1>Resource Example</h1>
+
+@if (PokeResource.isLoading()) {
+  <p>Loading...</p>
+}
+
+@if (PokeResource.value(); as pokemon) {
+  <h2>{{ pokemon.name }}</h2>
+  <img src="{{ pokemon.sprites.front_default }}" alt="{{ pokemon.name }}">
+}
+
+@if (PokeResource.error(); as error) {
+  <p>Não foi possible carregar os dados do pokemon</p>
+}
+
+<button (click)="loadData()">Load Pokémon</button>
