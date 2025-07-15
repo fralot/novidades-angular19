@@ -1,15 +1,15 @@
 <h1>RxJS Resource Example</h1>
 
-<ng-container *ngIf="loading$ | async">
+<ng-container *ngIf="loading | async">
   <p>Loading...</p>
 </ng-container>
 
-<ng-container *ngIf="pokemon$ | async as pokemon">
+<ng-container *ngIf="pokemon | async as pokemon">
   <h2>{{ pokemon.name }}</h2>
   <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}">
 </ng-container>
 
-<ng-container *ngIf="error$ | async as error">
+<ng-container *ngIf="error | async as error">
   <p>Error al cargar el Pokémon</p>
 </ng-container>
 

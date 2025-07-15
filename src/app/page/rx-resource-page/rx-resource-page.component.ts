@@ -14,9 +14,9 @@ import { Observable } from 'rxjs';
 export class RxResourcePageComponent {
   private readonly rxService = inject(RxResourceService);
 
-  pokemon$: Observable<Pokemon | null> = this.rxService.pokemon$;
-  loading$ = this.rxService.getLoading();
-  error$ = this.rxService.getError();
+  pokemon: Observable<Pokemon | null> = this.rxService.pokemon;
+  loading = this.rxService.getLoading();
+  error = this.rxService.getError();
 
   loadData() {
     this.rxService.loadPokemon('charizard');
