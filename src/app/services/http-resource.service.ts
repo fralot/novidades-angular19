@@ -1,5 +1,5 @@
 // src/app/services/http-resource.service.ts
-import { Injectable, signal, resource, effect } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pokemon } from '../model/pokemon.interfaces';
 
@@ -9,28 +9,44 @@ import { Pokemon } from '../model/pokemon.interfaces';
 export class HttpResourceService {
   private readonly baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-  private pokeName = signal<string | undefined>(undefined);
+  private loading = signal(false);
+  private error = signal<unknown>(null);
+  private data = signal<Pokemon | undefined>(undefined);
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  public pokeResource = resource({
-    loader: async () => {
-      return this.http.get<Pokemon>(`${this.baseUrl}/${this.pokeName()}`).subscribe({
-        next: (data) => data,
-        error: (err) => {
-          console.error('Error fetching Pokémon data:', err);
-          return undefined;
-        }
-      });
-    }
-  });
-
-  loadPokemon(name: string) {
-    this.pokeName.set(name);
-    return this.pokeResource;
+  getData() {
+    return this.data;
   }
 
-  reloadPokemon() {
-    this.pokeResource.reload();
+  isLoading() {
+    return this.loading;
+  }
+
+  getError() {
+    return this.error;
+  }
+
+  loadPokemon(name: string) {
+    this.loading.set(true);
+    this.error.set(null);
+
+    this.http.get<Pokemon>(`${this.baseUrl}/${name}`).subscribe({
+      next: (res) => {
+        this.data.set(res);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        this.error.set(err);
+        this.loading.set(false);
+      }
+    });
+  }
+
+  reload() {
+    const current = this.data();
+    if (current?.name) {
+      this.loadPokemon(current.name);
+    }
   }
 }

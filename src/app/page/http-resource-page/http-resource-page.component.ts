@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HttpResourceService } from '../../services/http-resource.service';
-import { ResourceRef } from '@angular/core';
-import { Pokemon } from '../../model/pokemon.interfaces';
+import { computed } from '@angular/core';
 
 @Component({
   selector: 'app-http-resource-page',
@@ -10,19 +9,21 @@ import { Pokemon } from '../../model/pokemon.interfaces';
   styleUrl: './http-resource-page.component.scss'
 })
 export class HttpResourcePageComponent {
-  private httpResourceService = inject(HttpResourceService);
+  private readonly httpService = inject(HttpResourceService);
 
-  pokeResource: any;
+  data = this.httpService.getData();
+  loading = this.httpService.isLoading();
+  error = this.httpService.getError();
 
   constructor() {
-    this.pokeResource = this.httpResourceService.loadPokemon('pikachu');
+    this.httpService.loadPokemon('pikachu');
   }
 
   loadData() {
-    this.pokeResource = this.httpResourceService.loadPokemon('bulbasaur');
+    this.httpService.loadPokemon('bulbasaur');
   }
 
   reloadData() {
-    this.httpResourceService.reloadPokemon();
+    this.httpService.reload();
   }
 }

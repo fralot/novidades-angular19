@@ -19,7 +19,6 @@ export class ResourceService {
 
   loadPokemon(pokeName: string) {
     this.pokemonName.set(pokeName);
-    console.log(`Cargando Pokémon: ${pokeName}`);
     return this.PokeDataResource;
   }
 

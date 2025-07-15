@@ -7,10 +7,10 @@ import { LinkSignalPageComponent } from './page/link-signal-page/link-signal-pag
 import { ResourcePageComponent } from './page/resource-page/resource-page.component';
 import { RxResourcePageComponent } from './page/rx-resource-page/rx-resource-page.component';
 import { HttpResourcePageComponent } from './page/http-resource-page/http-resource-page.component';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './page/home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: HomeComponent },
   { path: 'signal/input', component: InputPageComponent },
   { path: 'signal/output', component: OutputPageComponent },
   { path: 'signal/model', component: ModelPageComponent },
