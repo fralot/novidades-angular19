@@ -10,6 +10,9 @@ export class InputComponent {
   // Input obrigatório
   firstName = input.required<string>();
 
+  //outro exemplo com alias para input
+  age = input(0, {alias: 'studentAge'});
+
   // Input opcional com valor padrão
   lastName = input('Doe');
 
