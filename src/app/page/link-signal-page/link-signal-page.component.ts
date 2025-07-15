@@ -16,8 +16,6 @@ export class LinkSignalPageComponent implements OnInit {
     computation: (value: number) => value * 2
   });
 
-  source2: WritableSignal<number> = signal(20);
-
   ngOnInit(): void {
     console.log(this.doubled()); // 20
 
